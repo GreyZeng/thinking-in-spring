@@ -4,6 +4,8 @@
 
 原文地址：
 
+[Github](https://github.com/GreyZeng/articles/blob/master/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md)
+
 [语雀](https://www.yuque.com/greyzeng/uzfhep/xb2ggs) 
 
 [博客园](https://www.cnblogs.com/greyzeng/articles/14093197.html)
