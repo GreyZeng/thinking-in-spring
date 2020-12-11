@@ -359,3 +359,66 @@ service network restart
 最后重启node02虚拟机 即可
 
 node02克隆完毕
+
+
+## Linux的命令
+分为内部命令和外部命令
+内部命令（Shell自带的命令）
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588604727521-7fce2dd3-d1f9-4bc5-95ac-7071c77c78d7.png#align=left&display=inline&height=52&margin=%5Bobject%20Object%5D&name=image.png&originHeight=52&originWidth=275&size=3550&status=done&style=none&width=275)
+
+外部命令（不是Shell自带的命令，由用户安装的）
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588604749548-b6dde106-d9d3-4529-95ff-f9891a6c0bca.png#align=left&display=inline&height=59&margin=%5Bobject%20Object%5D&name=image.png&originHeight=59&originWidth=300&size=3679&status=done&style=none&width=300)
+
+查看命令是一个什么类型的文件
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588604859481-c0c12d62-f6b8-448c-a17f-97024f9785ae.png#align=left&display=inline&height=74&margin=%5Bobject%20Object%5D&name=image.png&originHeight=74&originWidth=773&size=9768&status=done&style=none&width=773)
+
+
+
+查看ifconfig命令在哪个位置
+
+```shell
+whereis ifconfig
+```
+
+什么是Shell?
+bash shell，就是一个程序，就是Linux系统安装的一个软件
+
+
+root/密码写对后，直接进入bash shell软件
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588605290609-77801687-5dca-4abf-8eaf-483e70d72e06.png#align=left&display=inline&height=294&margin=%5Bobject%20Object%5D&name=image.png&originHeight=294&originWidth=680&size=84812&status=done&style=none&width=680)
+
+
+
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588605354987-f9976149-de96-4db0-8e20-28c521255c87.png#align=left&display=inline&height=78&margin=%5Bobject%20Object%5D&name=image.png&originHeight=78&originWidth=276&size=23804&status=done&style=none&width=276)
+echo $PATH
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588605392931-c4e9cc67-60a5-46ec-9490-5b2c1080ebab.png#align=left&display=inline&height=41&margin=%5Bobject%20Object%5D&name=image.png&originHeight=41&originWidth=514&size=3691&status=done&style=none&width=514)
+
+
+
+内部命令的帮助用help指令，外部命令的帮助用man指令
+
+
+echo $$: 当前bash shell的进程号
+
+如果平时退出不了某个程序，可以复制一个ssh对话，用ps -ef找到那个进程，用kill -9 退出即可
+
+
+bash shell在执行命令的时候，做了两步优化：
+
+1. 通过PATH来
+1. 通过hash来，hash查看，hash -r（清空hash）
+
+
+
+## 参考资料
+
+[Linux命令行大全](https://book.douban.com/subject/22226727/)
+
+[Linux就该这么学](https://book.douban.com/subject/27198046/)
+
+[Linux预习资料](https://pan.baidu.com/s/1qLY7x29EtZO-uz3a06QzFQ)  [提取码：7w30]
