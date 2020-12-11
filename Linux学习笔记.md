@@ -422,3 +422,5 @@ bash shell在执行命令的时候，做了两步优化：
 [Linux就该这么学](https://book.douban.com/subject/27198046/)
 
 [Linux预习资料](https://pan.baidu.com/s/1qLY7x29EtZO-uz3a06QzFQ)  [提取码：7w30]
+
+[Linux内核设计与实现](https://book.douban.com/subject/6097773/)
