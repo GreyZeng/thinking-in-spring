@@ -415,6 +415,34 @@ bash shell在执行命令的时候，做了两步优化：
 
 
 
+## Linux文件系统
+
+
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588638734029-d7f3e8d9-e5b6-42ab-ad0f-bfa9d99e4541.png#align=left&display=inline&height=775&margin=%5Bobject%20Object%5D&name=image.png&originHeight=775&originWidth=807&size=217381&status=done&style=none&width=807)
+除了/boot的数据，其他目录下的数据都存在了sda3里面了
+
+/var  可变化的文件，比如：日志文件，数据文件
+
+ 
+
+更多文件类型说明见：
+![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588639527449-93861280-c798-4615-ad30-2a992ffa29a1.png#align=left&display=inline&height=604&margin=%5Bobject%20Object%5D&name=image.png&originHeight=604&originWidth=687&size=223193&status=done&style=none&width=687)
+
+```shell
+## 级联创建目录
+mkdir -p a/adir/bdir
+
+mkdir a/adir a/bdir a/cdir
+mkdir a/{1,2,3}dir
+
+
+## 复制文件夹
+cp -r a cpp/ ## 将a文件夹复制到cpp文件夹中，复制文件夹用 
+
+```
+
+stat和touch 组合使用，可以增量监控数据改变的时间 [linux命令系列 stat & touch](https://www.cnblogs.com/z-joshua/p/10042681.html)
+
 ## 参考资料
 
 [Linux命令行大全](https://book.douban.com/subject/22226727/)
