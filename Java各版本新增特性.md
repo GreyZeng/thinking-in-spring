@@ -5,11 +5,11 @@
 
 原文地址：
 
-[Github]()
+[Github](https://github.com/GreyZeng/articles/blob/master/Java%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E5%A2%9E%E7%89%B9%E6%80%A7.md)
 
-[语雀]()
+[语雀](https://www.yuque.com/greyzeng/uzfhep/qefgos)
 
-[博客园]()
+[博客园](https://www.cnblogs.com/greyzeng/p/14139032.html)
 
 
 ## Java 9
