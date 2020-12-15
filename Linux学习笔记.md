@@ -6,7 +6,7 @@
 
 [Github](https://github.com/GreyZeng/articles/blob/master/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md)
 
-[语雀](https://www.yuque.com/greyzeng/uzfhep/xb2ggs) 
+[语雀](https://www.yuque.com/greyzeng/uzfhep/xb2ggs)
 
 [博客园](https://www.cnblogs.com/greyzeng/articles/14093197.html)
 
@@ -22,8 +22,6 @@ VMware-workstation-full-15.5.2-15785246
 
 **其他版本的安装可作为参考**
 
-
-
 ### 安装步骤
 
 打开VMware，
@@ -31,8 +29,6 @@ VMware-workstation-full-15.5.2-15785246
 点击创建新的虚拟机，在新建虚拟机向导这里选择**自定义**,然后依次按照截图步骤进行安装
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588731194274-fa975902-3d75-4180-a2c3-c3c9e96bdd00.png)
-
-
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588731210347-c56e3aeb-377a-45d9-98f0-1a65381cdc60.png)
 
@@ -50,8 +46,6 @@ VMware-workstation-full-15.5.2-15785246
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588731347943-5b25a6d0-e817-4d3d-b6b2-6613d3bcd8d3.png)
 
-
-
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588597959841-2c155cdb-e104-48b1-907c-192a382a572d.png)
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588597995260-4e8cb8c9-697f-43ef-84cd-dcad47c45c01.png)
@@ -66,15 +60,11 @@ VMware-workstation-full-15.5.2-15785246
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588598087587-1cd31895-bd2d-4136-982b-1f8d578a62d7.png)
 
-
-
 默认启动即可，在启动过程中，有可能会出现如下错误：
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588731755864-7f1860d1-c7b0-44ef-8440-e0603046d391.png)
 
 这里是[解决方案](http://www.bubuko.com/infodetail-3314116.html)
-
-
 
 点击：编辑虚拟机设置
 
@@ -90,10 +80,6 @@ VMware-workstation-full-15.5.2-15785246
 
 此页面两个选项，请**选择Skip**
 
-
-
-
-
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588598508386-1519ed81-ee62-4e1c-8782-e893bbbe8294.png)
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588598553774-151ca285-a618-4426-8cf8-7c4f98d5e8a0.png)
@@ -102,10 +88,6 @@ VMware-workstation-full-15.5.2-15785246
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1607238404259-b3d4da30-81fd-4ad6-b328-c1125e495598.png)
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1607238419994-750b706c-d5f8-4454-9102-3dc20f75d4e2.png)
-
-
-
-
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588598615601-59497ad7-14b0-4b74-ab31-568433bee6f8.png)
 
@@ -119,15 +101,9 @@ VMware-workstation-full-15.5.2-15785246
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1607238599459-a58275e0-1e9b-40d5-b27c-62c92e125821.png)
 
-
-
 **这一步选择：Create Custom Layout**
 
-
-
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588598863841-b2da782a-b6db-4f8a-b43f-d6ca70df2ccf.png)
-
-
 
 接下来对硬盘进行分区分区
 
@@ -146,11 +122,7 @@ VMware-workstation-full-15.5.2-15785246
 
 3. 用户区
 
-
-
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588599207224-2d42adba-84f5-47c7-8d52-3e4e8bc11092.png)
-
-
 
 选中sda，创建第一个分区
 
@@ -170,13 +142,9 @@ VMware-workstation-full-15.5.2-15785246
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588599596711-118afd9c-f1a9-4e80-a4db-7fa16d0109fc.png)
 
-
-
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588599723441-2c0d890a-48ef-45c7-836a-afbd6dcef0d3.png)
 
 Linux安装完成
-
-
 
 ## 网络配置
 
@@ -192,10 +160,6 @@ Linux安装完成
    vi ifcfg-eth0
    ```
 
-   
-
-
-
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588600576104-13b1a6a6-645d-4ead-9663-77f21b810c0c.png)
 
 dhcp：自动获取，我们要改成static
@@ -208,15 +172,11 @@ VMware这里，点编辑->虚拟网络编辑器
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588600831779-f4b6a8c8-62f4-4dac-bd0d-7a0054892b41.png)
 
-
-
 如果选中以下
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588600922770-abea5879-f8d7-4f53-abde-91d5a7ab6919.png)
 
 那么在主机中会有：
-
-
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588600943876-e0eb111f-7620-45e8-91c0-f5ed2ed05f85.png)
 
@@ -238,9 +198,7 @@ VMware这里，点编辑->虚拟网络编辑器
 
 所以可以做如下配置：
 
-
-
-IPADDR=192.168.116.66 
+IPADDR=192.168.116.66
 
 NETMASK=255.255.255.0
 
@@ -250,13 +208,9 @@ DNS1=114.114.114.114
 
 DNS2=192.168.116.2
 
-
-
 **说明：我这里是116，你在操作的时候，不一定是116， 按照你本机显示的地址来配置即可。**
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588601798136-2462dde1-475d-4639-87d6-e2068fdb1393.png)
-
-
 
 重启网卡服务
 
@@ -267,8 +221,6 @@ service network restart
 测试：
 
 ping www.baidu.com 查看是否有数据接收到。
-
-
 
 ## 快照与克隆
 
@@ -314,8 +266,6 @@ cd /etc/sysconfig/network-scripts/
 vi ifcfg-eth0
 ```
 
-
-
 可以看到这个配置是copy了node01的配置，需要把这些配置修改一下，IPADDR设置为一个和node01不一样的地址即可（node01是66，node02设置为68即可）
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588602565000-71e96645-e197-4e58-a101-36d7b7880cc5.png)
@@ -330,8 +280,6 @@ vi network
 
 把hostname改成node02即可
 
-
-
 最后，需要在node02上删除一个文件(**因为这个文件中保存了网卡物理地址和网卡的名的关系，删除后，这个文件会自动生成**)，这个文件是
 
 ```bash
@@ -344,8 +292,6 @@ vi network
 rm -f /etc/udev/rules.d/70-persistent-net.rules
 ```
 
-
-
 node02克隆完毕
 
 然后重启node02的网络
@@ -354,16 +300,13 @@ node02克隆完毕
 service network restart
 ```
 
-
-
 最后重启node02虚拟机 即可
 
 node02克隆完毕
 
-
 ## Linux的命令
-分为内部命令和外部命令
-内部命令（Shell自带的命令）
+
+分为内部命令和外部命令 内部命令（Shell自带的命令）
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588604727521-7fce2dd3-d1f9-4bc5-95ac-7071c77c78d7.png#align=left&display=inline&height=52&margin=%5Bobject%20Object%5D&name=image.png&originHeight=52&originWidth=275&size=3550&status=done&style=none&width=275)
 
@@ -375,55 +318,39 @@ node02克隆完毕
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588604859481-c0c12d62-f6b8-448c-a17f-97024f9785ae.png#align=left&display=inline&height=74&margin=%5Bobject%20Object%5D&name=image.png&originHeight=74&originWidth=773&size=9768&status=done&style=none&width=773)
 
-
-
 查看ifconfig命令在哪个位置
 
 ```shell
 whereis ifconfig
 ```
 
-什么是Shell?
-bash shell，就是一个程序，就是Linux系统安装的一个软件
-
+什么是Shell? bash shell，就是一个程序，就是Linux系统安装的一个软件
 
 root/密码写对后，直接进入bash shell软件
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588605290609-77801687-5dca-4abf-8eaf-483e70d72e06.png#align=left&display=inline&height=294&margin=%5Bobject%20Object%5D&name=image.png&originHeight=294&originWidth=680&size=84812&status=done&style=none&width=680)
 
-
-
-
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588605354987-f9976149-de96-4db0-8e20-28c521255c87.png#align=left&display=inline&height=78&margin=%5Bobject%20Object%5D&name=image.png&originHeight=78&originWidth=276&size=23804&status=done&style=none&width=276)
 echo $PATH
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588605392931-c4e9cc67-60a5-46ec-9490-5b2c1080ebab.png#align=left&display=inline&height=41&margin=%5Bobject%20Object%5D&name=image.png&originHeight=41&originWidth=514&size=3691&status=done&style=none&width=514)
 
-
-
 内部命令的帮助用help指令，外部命令的帮助用man指令
-
 
 echo $$: 当前bash shell的进程号
 
 如果平时退出不了某个程序，可以复制一个ssh对话，用ps -ef找到那个进程，用kill -9 退出即可
-
 
 bash shell在执行命令的时候，做了两步优化：
 
 1. 通过PATH来
 1. 通过hash来，hash查看，hash -r（清空hash）
 
-
-
 ## Linux文件系统
-
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588638734029-d7f3e8d9-e5b6-42ab-ad0f-bfa9d99e4541.png#align=left&display=inline&height=775&margin=%5Bobject%20Object%5D&name=image.png&originHeight=775&originWidth=807&size=217381&status=done&style=none&width=807)
 除了/boot的数据，其他目录下的数据都存在了sda3里面了
 
-/var  可变化的文件，比如：日志文件，数据文件
-
- 
+/var 可变化的文件，比如：日志文件，数据文件
 
 更多文件类型说明见：
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588639527449-93861280-c798-4615-ad30-2a992ffa29a1.png#align=left&display=inline&height=604&margin=%5Bobject%20Object%5D&name=image.png&originHeight=604&originWidth=687&size=223193&status=done&style=none&width=687)
@@ -442,6 +369,38 @@ cp -r a cpp/ ## 将a文件夹复制到cpp文件夹中，复制文件夹用
 ```
 
 stat和touch 组合使用，可以增量监控数据改变的时间 [linux命令系列 stat & touch](https://www.cnblogs.com/z-joshua/p/10042681.html)
+
+## 命令积累
+
+与时间服务器上的时间同步
+
+1. 安装ntpdate工具
+
+```shell
+yum -y install ntp ntpdate
+```
+
+2. 设置时间为阿里服务器的时间
+
+```shell
+ntpdate ntp1.aliyun.com
+```
+
+3. 将系统时间写入硬件时间
+
+```shell
+hwclock –systohc
+```
+
+一屏可以显示的文件，可以用cat 一屏显示不出来的内容，用more命令，space翻页，无法回看 使用less 命令就可以往后推（space），按b键往前翻（less是将文件一次性load内存，所以文件大的时候只能用more）
+
+head -n 文件名 前n行的数据 tail -n 文件名 后n行数据 tail -f 文件名 监控文件内容改变
+
+管道命令 cat xxx | head -3 cat xxx作为输出流的形式作为后面命令的输入流
+
+ls -l 无法接受前面的输出流的内容，如果要解决，需要这样用： echo "/" | xargs ls -l
+
+head -5 xxx | tail -1 获取第五行的数据
 
 ## 参考资料
 
