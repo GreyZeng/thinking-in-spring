@@ -5,11 +5,11 @@
 
 原文地址：
 
-[Github]()
+[Github](https://github.com/GreyZeng/articles/blob/master/Linux%E4%B8%8BMySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D.md)
 
-[语雀]()
+[语雀](https://www.yuque.com/greyzeng/uzfhep/bwav3b)
 
-[博客园]()
+[博客园](https://www.cnblogs.com/greyzeng/p/14139141.html)
 
 ## 基于版本
 
