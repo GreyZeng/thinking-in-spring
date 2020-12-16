@@ -1,4 +1,4 @@
-# Java各版本新增特性, Since Java 9
+# Java各版本新增特性, Since Java 8
 
 作者：[Grey](https://www.cnblogs.com/greyzeng/)
 
@@ -10,6 +10,564 @@
 [语雀](https://www.yuque.com/greyzeng/uzfhep/qefgos)
 
 [博客园](https://www.cnblogs.com/greyzeng/p/14139032.html)
+
+## Java 8
+
+> Reactor of Java 这一章来自于[《Spring in Action, 5th》](https://book.douban.com/subject/30346440/) 的笔记，因为这本书讲Reactor of Java讲的太好了，所以作为笔记摘抄了下来。
+
+### Reactor of Java
+
+In an imperative programming model, the code would look something like this:
+
+```java
+String name = "Craig";
+String capitalName = name.toUpperCase();
+String greeting = "Hello, " + capitalName + "!";
+System.out.println(greeting);
+```
+
+
+In the imperative model, each line of code performs a step, one right after the other, and definitely in the same thread. Each step blocks the executing thread from moving to the next step until complete. In contrast, functional, reactive code could achieve the same thing like this:
+
+
+
+```java
+Mono.just("Craig")
+        .map(n -> n.toUpperCase())
+        .map(n -> "Hello, " + n + " !")
+        .subscribe(System.out::println);
+```
+
+The Mono in the example is one of Reactor’s two core types. Flux is the other. Both are implementations of Reactive Streams’ Publisher.
+A Flux represents** a pipeline of zero, one, or many (potentially infinite) data items**.
+A Mono is a specialized reactive type that’s optimized for when the dataset is known to have **no more than one data** item.
+
+![](https://cdn.nlark.com/yuque/0/2020/png/757806/1583580980687-10d3732c-fc88-4626-be52-7f9c98fe10a4.png#align=left&display=inline&height=687&originHeight=687&originWidth=1198&status=done&style=none&width=1198)
+
+
+![](https://cdn.nlark.com/yuque/0/2020/png/757806/1583580980714-8e157176-3a2f-4b80-9d56-79d091525980.png#align=left&display=inline&height=683&originHeight=683&originWidth=1281&status=done&style=none&width=1281)
+
+
+
+CREATING FROM OBJECTS
+
+```java
+Flux<String> fruitFlux = Flux
+        .just("Apple", "Orange", "Grape", "Banana", "Strawberry");
+        fruitFlux.subscribe(f -> System.out.println("Hello " + f));
+
+// for test
+        StepVerifier.create(fruitFlux)
+        .expectNext("Apple")
+        .expectNext("Orange")
+        .expectNext("Grape")
+        .expectNext("Banana")
+        .expectNext("Strawberry")
+        .verifyComplete();
+```
+
+
+CREATING FROM COLLECTIONS
+
+```java
+Stream<String> fruitStream = Stream.of("Apple", "Orange", "Grape", "Banana", "Strawberry");
+        Flux<String> fruitFlux2 = Flux.fromStream(fruitStream);
+        fruitFlux2.subscribe(s -> System.out.println(s));
+
+        List<String> fruitList = new ArrayList<>();
+        fruitList.add("Apple");
+        fruitList.add("Orange");
+        fruitList.add("Grape");
+        fruitList.add("Banana");
+        fruitList.add("Strawberry");
+        Flux<String> fruitFlux3 = Flux.fromIterable(fruitList);
+        fruitFlux3.subscribe(s -> System.out.println(s));
+
+
+        String[] fruits = new String[] {"Apple", "Orange", "Grape", "Banana", "Strawberry" };
+        Flux<String> fruitFlux = Flux.fromArray(fruits);
+        fruitFlux.subscribe(s -> System.out.println(s));
+        StepVerifier.create(fruitFlux)
+        .expectNext("Apple")
+        .expectNext("Orange")
+        .expectNext("Grape")
+        .expectNext("Banana")
+        .expectNext("Strawberry")
+        .verifyComplete();
+```
+
+
+GENERATING FLUX DATA
+```java
+Flux<Integer> intervalFlux =
+Flux.range(1, 5);
+intervalFlux.subscribe(integer -> System.out.println(integer));
+StepVerifier.create(intervalFlux)
+.expectNext(1)
+.expectNext(2)
+.expectNext(3)
+.expectNext(4)
+.expectNext(5)
+.verifyComplete();
+
+Flux<Long> intervalFlux =
+Flux.interval(Duration.ofSeconds(1))
+.take(5);
+intervalFlux.subscribe(i -> System.out.println(i));
+StepVerifier.create(intervalFlux)
+.expectNext(0L)
+.expectNext(1L)
+.expectNext(2L)
+.expectNext(3L)
+.expectNext(4L)
+.verifyComplete();
+```
+
+
+MERGING REACTIVE TYPES
+```java
+Flux<String> characterFlux = Flux
+.just("Garfield", "Kojak", "Barbossa")
+.delayElements(Duration.ofMillis(500));
+Flux<String> foodFlux = Flux
+.just("Lasagna", "Lollipops", "Apples")
+.delaySubscription(Duration.ofMillis(250))
+.delayElements(Duration.ofMillis(500));
+Flux<String> mergedFlux = characterFlux.mergeWith(foodFlux);
+mergedFlux.subscribe(s -> System.out.println(s));
+StepVerifier.create(mergedFlux)
+.expectNext("Garfield")
+.expectNext("Lasagna")
+.expectNext("Kojak")
+.expectNext("Lollipops")
+.expectNext("Barbossa")
+.expectNext("Apples")
+.verifyComplete();
+
+Flux<String> characterFlux = Flux
+.just("Garfield", "Kojak", "Barbossa");
+Flux<String> foodFlux = Flux
+.just("Lasagna", "Lollipops", "Apples");
+Flux<Tuple2<String, String>> zippedFlux =
+Flux.zip(characterFlux, foodFlux);
+zippedFlux.subscribe(x -> System.out.println(x));
+StepVerifier.create(zippedFlux)
+.expectNextMatches(p ->
+p.getT1().equals("Garfield") &&
+p.getT2().equals("Lasagna"))
+.expectNextMatches(p ->
+p.getT1().equals("Kojak") &&
+p.getT2().equals("Lollipops"))
+.expectNextMatches(p ->
+p.getT1().equals("Barbossa") &&
+p.getT2().equals("Apples"))
+.verifyComplete();
+
+Flux<String> characterFlux = Flux
+.just("Garfield", "Kojak", "Barbossa");
+Flux<String> foodFlux = Flux
+.just("Lasagna", "Lollipops", "Apples");
+Flux<String> zippedFlux =
+Flux.zip(characterFlux, foodFlux, (c, f) -> c + " eats " + f);
+zippedFlux.subscribe(x -> System.out.println(x));
+StepVerifier.create(zippedFlux)
+.expectNext("Garfield eats Lasagna")
+.expectNext("Kojak eats Lollipops")
+.expectNext("Barbossa eats Apples")
+.verifyComplete();
+```
+
+
+SELECTING THE FIRST REACTIVE TYPE TO PUBLISH
+
+```java
+Flux<String> slowFlux = Flux.just("tortoise", "snail", "sloth")
+.delaySubscription(Duration.ofMillis(100));
+Flux<String> fastFlux = Flux.just("hare", "cheetah", "squirrel");
+Flux<String> firstFlux = Flux.first(slowFlux, fastFlux);
+StepVerifier.create(firstFlux)
+.expectNext("hare")
+.expectNext("cheetah")
+.expectNext("squirrel")
+.verifyComplete();
+
+```
+
+FILTERING DATA FROM REACTIVE TYPES
+
+```java
+Flux<String> skipFlux = Flux.just(
+"one", "two", "skip a few", "ninety nine", "one hundred")
+.skip(3);
+StepVerifier.create(skipFlux)
+.expectNext("ninety nine", "one hundred")
+.verifyComplete();
+
+Flux<String> skipFlux = Flux.just(
+"one", "two", "skip a few", "ninety nine", "one hundred")
+.delayElements(Duration.ofSeconds(1))
+.skip(Duration.ofSeconds(4));
+StepVerifier.create(skipFlux)
+.expectNext("ninety nine", "one hundred")
+.verifyComplete();
+
+Flux<String> nationalParkFlux = Flux.just(
+"Yellowstone", "Yosemite", "Grand Canyon",
+"Zion", "Grand Teton")
+.take(3);
+StepVerifier.create(nationalParkFlux)
+.expectNext("Yellowstone", "Yosemite", "Grand Canyon")
+.verifyComplete();
+
+Flux<String> nationalParkFlux = Flux.just(
+"Yellowstone", "Yosemite", "Grand Canyon",
+"Zion", "Grand Teton")
+.delayElements(Duration.ofSeconds(1))
+.take(Duration.ofMillis(3500));
+StepVerifier.create(nationalParkFlux)
+.expectNext("Yellowstone", "Yosemite", "Grand Canyon")
+.verifyComplete();
+
+Flux<String> nationalParkFlux = Flux.just(
+"Yellowstone", "Yosemite", "Grand Canyon",
+"Zion", "Grand Teton")
+.filter(np -> !np.contains(" "));
+StepVerifier.create(nationalParkFlux)
+.expectNext("Yellowstone", "Yosemite", "Zion")
+.verifyComplete();
+
+Flux<String> animalFlux = Flux.just(
+"dog", "cat", "bird", "dog", "bird", "anteater")
+.distinct();
+StepVerifier.create(animalFlux)
+.expectNext("dog", "cat", "bird", "anteater")
+.verifyComplete();
+```
+
+
+MAPPING REACTIVE DATA
+
+```java
+Flux<Player> playerFlux = Flux
+.just("Michael Jordan", "Scottie Pippen", "Steve Kerr")
+.map(n -> {
+String[] split = n.split("\\s");
+return new Player(split[0], split[1]);
+});
+StepVerifier.create(playerFlux)
+.expectNext(new Player("Michael", "Jordan"))
+.expectNext(new Player("Scottie", "Pippen"))
+.expectNext(new Player("Steve", "Kerr"))
+.verifyComplete();
+
+Flux<Player> playerFlux = Flux
+.just("Michael Jordan", "Scottie Pippen", "Steve Kerr")
+.flatMap(n -> Mono.just(n)
+.map(p -> {
+String[] split = p.split("\\s");
+return new Player(split[0], split[1]);
+})
+.subscribeOn(Schedulers.parallel())
+);
+List<Player> playerList = Arrays.asList(
+new Player("Michael", "Jordan"),
+new Player("Scottie", "Pippen"),
+new Player("Steve", "Kerr"));
+StepVerifier.create(playerFlux)
+.expectNextMatches(p -> playerList.contains(p))
+.expectNextMatches(p -> playerList.contains(p))
+.expectNextMatches(p -> playerList.contains(p))
+.verifyComplete();
+```
+
+
+BUFFERING DATA ON A REACTIVE STREAM
+
+```java
+Flux<String> fruitFlux = Flux.just(
+"apple", "orange", "banana", "kiwi", "strawberry");
+
+Flux<List<String>> bufferedFlux = fruitFlux.buffer(3);
+
+StepVerifier
+.create(bufferedFlux)
+.expectNext(Arrays.asList("apple", "orange", "banana"))
+.expectNext(Arrays.asList("kiwi", "strawberry"))
+.verifyComplete();
+
+Buffering values from a reactive Flux into non-reactive List collections seems counterproductive. But when you combine buffer() with flatMap(), it enables each of the List collections to be processed in parallel:
+Flux.just(
+"apple", "orange", "banana", "kiwi", "strawberry")
+.buffer(3)
+.flatMap(x ->
+Flux.fromIterable(x)
+.map(y -> y.toUpperCase())
+.subscribeOn(Schedulers.parallel())
+.log()
+).subscribe();
+
+Flux<String> fruitFlux = Flux.just(
+"apple", "orange", "banana", "kiwi", "strawberry");
+
+Mono<List<String>> fruitListMono = fruitFlux.collectList();
+
+StepVerifier
+.create(fruitListMono)
+.expectNext(Arrays.asList(
+"apple", "orange", "banana", "kiwi", "strawberry"))
+.verifyComplete();
+
+Flux<String> animalFlux = Flux.just(
+"aardvark", "elephant", "koala", "eagle", "kangaroo");
+
+Mono<Map<Character, String>> animalMapMono =
+animalFlux.collectMap(a -> a.charAt(0));
+
+StepVerifier
+.create(animalMapMono)
+.expectNextMatches(map -> {
+return
+map.size() == 3 &&
+map.get('a').equals("aardvark") &&
+map.get('e').equals("eagle") &&
+map.get('k').equals("kangaroo");
+})
+.verifyComplete();
+
+Performing logic operations on reactive types
+Flux<String> animalFlux = Flux.just(
+"aardvark", "elephant", "koala", "eagle", "kangaroo");
+
+Mono<Boolean> hasAMono = animalFlux.all(a -> a.contains("a"));
+StepVerifier.create(hasAMono)
+.expectNext(true)
+.verifyComplete();
+
+Mono<Boolean> hasKMono = animalFlux.all(a -> a.contains("k"));
+StepVerifier.create(hasKMono)
+.expectNext(false)
+.verifyComplete();
+
+Flux<String> animalFlux = Flux.just(
+"aardvark", "elephant", "koala", "eagle", "kangaroo");
+
+Mono<Boolean> hasAMono = animalFlux.any(a -> a.contains("a"));
+
+StepVerifier.create(hasAMono)
+.expectNext(true)
+.verifyComplete();
+
+Mono<Boolean> hasZMono = animalFlux.any(a -> a.contains("z"));
+StepVerifier.create(hasZMono)
+.expectNext(false)
+.verifyComplete();
+```
+
+
+Spring MVC change to Spring WebFlux
+```java
+@GetMapping("/recent")
+public Iterable<Taco> recentTacos() {
+PageRequest page = PageRequest.of(
+0, 12, Sort.by("createdAt").descending());
+return tacoRepo.findAll(page).getContent();
+}
+
+@GetMapping("/recent")
+public Flux<Taco> recentTacos() {
+return Flux.fromIterable(tacoRepo.findAll()).take(12);
+}
+
+@PostMapping(consumes="application/json")
+@ResponseStatus(HttpStatus.CREATED)
+public Taco postTaco(@RequestBody Taco taco) {
+return tacoRepo.save(taco);
+}
+@PostMapping(consumes="application/json")
+@ResponseStatus(HttpStatus.CREATED)
+public Mono<Taco> postTaco(@RequestBody Mono<Taco> tacoMono) {
+return tacoRepo.saveAll(tacoMono).next();
+}
+
+public interface TacoRepository
+extends ReactiveCrudRepository<Taco, Long> {
+}
+@GetMapping("/{id}")
+public Taco tacoById(@PathVariable("id") Long id) {
+Optional<Taco> optTaco = tacoRepo.findById(id);
+if (optTaco.isPresent()) {
+return optTaco.get();
+}
+return null;
+}
+@GetMapping("/{id}")
+public Mono<Taco> tacoById(@PathVariable("id") Long id) {
+return tacoRepo.findById(id);
+}
+```
+
+
+WORKING WITH RXJAVA TYPES
+```java
+@GetMapping("/recent")
+public Observable<Taco> recentTacos() {
+return tacoService.getRecentTacos();
+}
+
+@GetMapping("/{id}")
+public Single<Taco> tacoById(@PathVariable("id") Long id) {
+return tacoService.lookupTaco(id);
+}
+```
+
+
+
+Developing Reactive APIs
+```java
+@Configuration
+public class RouterFunctionConfig {
+@Autowired
+private TacoRepository tacoRepo;
+@Bean
+public RouterFunction<?> routerFunction() {
+return route(GET("/design/taco"), this::recents)
+Testing reactive controllers 279
+.andRoute(POST("/design"), this::postTaco);
+}
+public Mono<ServerResponse> recents(ServerRequest request) {
+return ServerResponse.ok()
+.body(tacoRepo.findAll().take(12), Taco.class);
+}
+public Mono<ServerResponse> postTaco(ServerRequest request) {
+Mono<Taco> taco = request.bodyToMono(Taco.class);
+Mono<Taco> savedTaco = tacoRepo.save(taco);
+return ServerResponse
+.created(URI.create(
+"http://localhost:8080/design/taco/" +
+savedTaco.getId()))
+.body(savedTaco, Taco.class);
+}
+}
+```
+
+
+Test Reactive Rest APIs
+```java
+// Test Get Method
+Taco[] tacos = {
+testTaco(1L), testTaco(2L),
+testTaco(3L), testTaco(4L),
+testTaco(5L), testTaco(6L),
+testTaco(7L), testTaco(8L),
+testTaco(9L), testTaco(10L),
+testTaco(11L), testTaco(12L),
+testTaco(13L), testTaco(14L),
+testTaco(15L), testTaco(16L)};
+Flux<Taco> tacoFlux = Flux.just(tacos);
+TacoRepository tacoRepo = Mockito.mock(TacoRepository.class);
+when(tacoRepo.findAll()).thenReturn(tacoFlux);
+WebTestClient testClient = WebTestClient.bindToController(
+new DesignTacoController(tacoRepo))
+.build();
+testClient.get().uri("/design/recent")
+.exchange()
+.expectStatus().isOk()
+.expectBody()
+.jsonPath("$").isArray()
+.jsonPath("$").isNotEmpty()
+.jsonPath("$[0].id").isEqualTo(tacos[0].getId().toString())
+.jsonPath("$[0].name").isEqualTo("Taco 1").jsonPath("$[1].id")
+.isEqualTo(tacos[1].getId().toString()).jsonPath("$[1].name")
+.isEqualTo("Taco 2").jsonPath("$[11].id")
+.isEqualTo(tacos[11].getId().toString())
+.jsonPath("$[11].name").isEqualTo("Taco 12").jsonPath("$[12]")
+.doesNotExist().jsonPath("$[12]").doesNotExist();
+
+// Test POST Method
+
+TacoRepository tacoRepo = Mockito.mock(
+TacoRepository.class);
+Mono<Taco> unsavedTacoMono = Mono.just(testTaco(null));
+Taco savedTaco = testTaco(null);
+savedTaco.setId(1L);
+Mono<Taco> savedTacoMono = Mono.just(savedTaco);
+when(tacoRepo.save(any())).thenReturn(savedTacoMono);
+WebTestClient testClient = WebTestClient.bindToController(
+new DesignTacoController(tacoRepo)).build();
+testClient.post()
+.uri("/design")
+.contentType(MediaType.APPLICATION_JSON)
+.body(unsavedTacoMono, Taco.class)
+.exchange()
+.expectStatus().isCreated()
+.expectBody(Taco.class)
+.isEqualTo(savedTaco);
+
+// Testing with a live server
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
+public class DesignTacoControllerWebTest {
+@Autowired
+private WebTestClient testClient;
+@Test
+public void shouldReturnRecentTacos() throws IOException {
+testClient.get().uri("/design/recent")
+.accept(MediaType.APPLICATION_JSON).exchange()
+.expectStatus().isOk()
+.expectBody()
+.jsonPath("$[?(@.id == 'TACO1')].name")
+.isEqualTo("Carnivore")
+.jsonPath("$[?(@.id == 'TACO2')].name")
+.isEqualTo("Bovine Bounty")
+.jsonPath("$[?(@.id == 'TACO3')].name")
+.isEqualTo("Veg-Out");
+}
+}
+```
+
+
+Consume Reactive APIs
+
+```java
+Flux ingredients = WebClient.create()
+.get()
+.uri("http://localhost:8080/ingredients")
+.retrieve()
+.bodyToFlux(Ingredient.class);
+ingredients.subscribe(i -> { ...})
+
+Flux<Ingredient> ingredients = WebClient.create()
+.get()
+.uri("http://localhost:8080/ingredients")
+.retrieve()
+.bodyToFlux(Ingredient.class);
+ingredients
+.timeout(Duration.ofSeconds(1))
+.subscribe(
+i -> { ... },
+e -> {
+// handle timeout error
+})
+
+//Handing errors
+ingredientMono.subscribe(
+ingredient -> {
+// handle the ingredient data
+...
+},
+error-> {
+// deal with the error
+...
+});
+
+Mono<Ingredient> ingredientMono = webClient
+.get()
+.uri("http://localhost:8080/ingredients/{id}", ingredientId)
+.retrieve()
+.onStatus(HttpStatus::is4xxClientError,
+response -> Mono.just(new UnknownIngredientException()))
+.bodyToMono(Ingredient.class);
+```
 
 
 ## Java 9
@@ -391,6 +949,8 @@ Optional<String> transformed = optionalString.or(() -> alternatives.stream().fin
 
 
 ## 参考资料
+
+[Spring in Action, 5th](https://book.douban.com/subject/30346440/)
 
 [Java核心技术·卷 I（原书第11版）](https://book.douban.com/subject/34898994/)
 
