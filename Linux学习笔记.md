@@ -381,6 +381,159 @@ bash shell在执行命令的时候，做了两步优化：
 1. 通过PATH来
 1. 通过hash来，hash查看，hash -r（清空hash）
 
+## Shell
+
+
+编写脚本时候要赋予该文件执行权限`chmod u+rx filename`
+
+
+如果bash执行，不需要赋予执行权限
+
+
+bash ./filename.sh
+./filename.sh
+以上两种执行方式都是新开一个进程
+
+
+source ./filename.sh
+.filename.sh
+这种方式执行不会产生新的子进程
+
+
+```shell
+#!/bin/bash/
+cd /tmp
+pwd
+```
+
+
+输入重定向符号 <
+
+
+read var < /path/to/a/file
+
+
+输出重定向 >   >> 2> &>
+
+
+echo 123 > /path/to/a/file  清空输入
+echo 123 >> /path/to/a/file 追加
+echo 12343 2> /path/to/a/file 错误输入
+echo 122 &> /path/to/a/file 全部输入
+
+
+```shell
+#!/bin/bash
+
+cat > /data/m.sh << EOF
+echo "hello bash"
+EOF
+```
+
+
+变量赋值
+
+
+- a=123
+- let a=10+2
+- l=ls
+- letc=$(ls -l /etc) 或 letc=`ls -l /etc`
+- 变量值有空格等特殊字符可以包括在"" 或 ``中
+- echo ${变量名} 查看变量的值
+- ![](https://g.yuque.com/gr/latex?%7B%7D%E5%8F%AF%E4%BB%A5%E7%9C%81%E7%95%A5%E4%B8%BA#card=math&code=%7B%7D%E5%8F%AF%E4%BB%A5%E7%9C%81%E7%95%A5%E4%B8%BA)
+
+
+
+变量的默认作用范围
+默认自己的shell进程中
+
+
+变量的导出，让子进程获得父进程的变量值
+
+
+- export 变量名
+  变量的删除
+- unset 变量名
+
+
+
+环境变量：每个Shell打开都可以获得的变量
+
+
+- set和env命令
+- $? 上一条命令是否正确执行（正确：0， 错误：1）
+- ![](https://g.yuque.com/gr/latex?%20%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D%E8%BF%9B%E7%A8%8B%E7%9A%84pid%0A#card=math&code=%20%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D%E8%BF%9B%E7%A8%8B%E7%9A%84pid%0A)
+
+- $PATH
+- $PS1
+
+
+
+位置变量
+
+
+- $1 $2 ... $n
+
+
+
+```shell
+#!/bin/bash
+
+# $1 $2 ...$9 ${10}
+
+
+echo $1
+# 默认打印第二个参数值，如果为空则显示_
+echo ${2-_}
+```
+
+
+环境变量配置文件所在目录
+
+
+- /etc/profile
+- /etc/profile.d/
+- ~/.bash_profile
+- ~/.bashrc
+- /etc/bashrc
+
+
+
+> 说明：/etc/下的配置文件，表示所有用户通用的配置，用户家目录的配置文件只能特定用户使用，
+su - 用户名  login shell 所有都可以执行
+su 用户名 nologin shell  /bashrc, /etc/bashrc
+
+
+
+所用终端都应用新的环境变量: export PATH=$PATH:/new/to/path
+让环境变量立即生效：source /etc/profile
+
+
+定义数组
+
+
+```shell
+# 数组定义
+IPTS=(10.0 1.0 3.0)
+
+# 显示数组中所有元素
+echo ${IPTS[@]}
+
+#显示数组元素个数
+echo ${#IPTS[@]}
+
+显示数组的第一个元素
+echo ${IPTS[0]}
+```
+
+
+Q：
+
+
+- 内建命令不需要创建子进程
+- 内建命令对当前shell有效
+
+
 ## Linux文件系统
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/757806/1588638734029-d7f3e8d9-e5b6-42ab-ad0f-bfa9d99e4541.png#align=left&display=inline&height=775&margin=%5Bobject%20Object%5D&name=image.png&originHeight=775&originWidth=807&size=217381&status=done&style=none&width=807)
