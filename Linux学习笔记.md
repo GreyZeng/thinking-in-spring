@@ -304,6 +304,42 @@ service network restart
 
 node02克隆完毕
 
+
+
+## 配置ssh密钥连接Linux
+
+首先Win10系统上需要有OpenSSH，像这样：终端输入ssh
+
+![](https://cdn.nlark.com/yuque/0/2020/png/757806/1583580986229-a39ca5f4-a6df-43c1-9e57-e85003836fa0.png#align=left&display=inline&height=136&margin=%5Bobject%20Object%5D&originHeight=163&originWidth=689&status=done&style=none&width=576)
+
+这样就是有的（好像Win10 1809+默认就是有的）。
+然后生成密钥对：
+ssh-keygen -t rsa
+接着按提示信息可根据个人需求选择，这里是默认（连续三个回车即可）。
+生成的密钥对默认保存在当前用户的根目录下的.ssh目录中（C:\Users\username\.ssh）：
+
+![](https://cdn.nlark.com/yuque/0/2020/png/757806/1583580986262-866d2d74-0511-4d07-b535-42f34c103bd8.png#align=left&display=inline&height=128&margin=%5Bobject%20Object%5D&originHeight=153&originWidth=691&status=done&style=none&width=576)
+
+接着我们将公钥id_rsa.pub上传至Linux服务器（保存到你要连接的用户根目录下~/.ssh/中，没有.ssh目录则创建）：
+修改/etc/ssh/sshd_config配制文件，修改以下内容
+RSAAuthentication yes
+PubkeyAuthentication yes
+PasswordAuthentication no
+
+                                     
+上传好后，将Linux中的id_rsa.pub重命名为authorized_keys，更改文件权限为600，更改.ssh目录权限为700：
+mv id_rsa.pub authorized_keys
+chmod 600 authorized_keys
+chmod 700 .ssh
+
+
+然后就可以通过ssh方式连接到Linux
+
+![](https://cdn.nlark.com/yuque/0/2020/png/757806/1583580986286-d1deb211-ea47-403c-9ffb-048f2a97373f.png#align=left&display=inline&height=507&margin=%5Bobject%20Object%5D&originHeight=507&originWidth=504&status=done&style=none&width=504)
+
+
+
+
 ## Linux的命令
 
 分为内部命令和外部命令 内部命令（Shell自带的命令）
