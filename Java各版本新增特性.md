@@ -851,7 +851,7 @@ Pair<String> p = Pair.makePair(String:new);
 ```
 
 
-In general, there is no relationship between Pair<S> and Pair<T>, no matter how S and T are related.
+In general, there is no relationship between ```Pair<S>``` and ```Pair<T>```, no matter how S and T are related.
 
 
 BUT
