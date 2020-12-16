@@ -609,3 +609,5 @@ screen -d -r yourname ## 结束当前session并回到yourname这个session
 [Linux预习资料](https://pan.baidu.com/s/1qLY7x29EtZO-uz3a06QzFQ)  [提取码：7w30]
 
 [Linux内核设计与实现](https://book.douban.com/subject/6097773/)
+
+[极客时间-Linux实战技能100讲](https://time.geekbang.org/course/intro/100029601)
