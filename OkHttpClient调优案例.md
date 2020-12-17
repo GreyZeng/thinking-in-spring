@@ -6,9 +6,11 @@
 
 [语雀](https://www.yuque.com/greyzeng/uzfhep/rgmccw)
 
-[博客园]()
+[博客园](https://www.cnblogs.com/greyzeng/p/14148675.html)
 
-[Github]()
+[Github](https://github.com/GreyZeng/articles/blob/master/OkHttpClient%E8%B0%83%E4%BC%98%E6%A1%88%E4%BE%8B.md)
+
+
 
 实际案例
 系统运行一段时间后，线程数量飙升，CPU持续居高不下
