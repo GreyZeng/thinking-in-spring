@@ -17,5 +17,5 @@
 
 [OkHttpClient调优案例](OkHttpClient调优案例.md)
 
-[基于Spring Boot的统一异常处理设计](基于Spring Boot的统一异常处理设计.md)
+[基于Spring的统一异常处理设计](基于Spring的统一异常处理设计.md)
 

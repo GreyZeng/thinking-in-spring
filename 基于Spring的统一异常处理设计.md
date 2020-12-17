@@ -1,4 +1,4 @@
-# 基于Spring Boot的统一异常处理设计
+# 基于Spring的统一异常处理设计
 
 作者： [Grey](https://www.cnblogs.com/greyzeng)
 
