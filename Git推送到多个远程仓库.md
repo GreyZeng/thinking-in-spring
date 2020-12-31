@@ -15,11 +15,9 @@
 
 在[码云](https://gitee.com/)和[Github](https://github.com/)上分别新建两个**不包括任何文件的空仓库**(若是两个已经有文件的仓库，请参见[关联已经存在的项目](#jump))
 
-- 
-[https://github.com/GreyZeng/article.git](https://github.com/GreyZeng/article.git)
+- [https://github.com/GreyZeng/article.git](https://github.com/GreyZeng/article.git)
 
-- 
-[https://gitee.com/greyzeng/article.git](https://gitee.com/greyzeng/article.git)
+- [https://gitee.com/greyzeng/article.git](https://gitee.com/greyzeng/article.git)
 
 
 在本地新建一个article的文件夹，在该文件夹目录下执行：
@@ -53,11 +51,9 @@ git push -u origin master
 
 #### 准备工作
 
-- 
-[https://github.com/GreyZeng/article.git](https://github.com/GreyZeng/article.git)
+- [https://github.com/GreyZeng/article.git](https://github.com/GreyZeng/article.git)
 
-- 
-[https://gitee.com/greyzeng/article.git](https://gitee.com/greyzeng/article.git)
+- [https://gitee.com/greyzeng/article.git](https://gitee.com/greyzeng/article.git)
 
 
 两个仓库已经有一个readme.txt文件
