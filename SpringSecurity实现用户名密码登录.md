@@ -5,7 +5,7 @@
 
 原文地址：
 
-[Github]()
+[Github](https://github.com/GreyZeng/articles/blob/master/SpringSecurity%E5%AE%9E%E7%8E%B0%E7%94%A8%E6%88%B7%E5%90%8D%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95.md)
 
 [语雀](https://www.yuque.com/greyzeng/uzfhep/cpq1mp)
 
