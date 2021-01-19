@@ -28,3 +28,5 @@
 [Git推送到多个远程仓库](Git推送到多个远程仓库.md)
 
 [Java多线程](https://github.com/GreyZeng/juc)
+
+[Linux下Too-many-open-files问题排查与解决](Linux下Too-many-open-files问题排查与解决.md)
