@@ -5,11 +5,11 @@
 
 原文地址：
 
-[Github]()
+[Github](https://github.com/GreyZeng/articles/blob/master/Linux%E4%B8%8BToo%20many%20open%20files%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E4%B8%8E%E8%A7%A3%E5%86%B3.md)
 
 [语雀](https://www.yuque.com/greyzeng/uzfhep/onlvr6)
 
-[博客园]()
+[博客园](https://www.cnblogs.com/greyzeng/p/14297258.html)
 
 
 > > Too many open files是Linux系统中常见的错误，从字面意思上看就是说程序打开的文件数过多，不过这里的files不单是文件的意思，也包括打开的通讯链接(比如socket)，正在监听的端口等等，所以有时候也可以叫做句柄(handle)，这个错误通常也可以叫做句柄数超出系统限制。引起的原因就是进程在某个时刻打开了超过系统限制的文件数量以及通讯链接数。
