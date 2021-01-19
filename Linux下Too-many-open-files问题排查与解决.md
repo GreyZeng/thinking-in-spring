@@ -56,13 +56,18 @@ ulimit -n 65535
 ```
 
 
+如果要查看某个进程目前打开的句柄数量，可以通过如下命令：
+
+```bash
+lsof -p 进程ID|wc -l
+```
 
 此外，如果用supervisor托管和启动项目，会遇到这个配置无法生效的问题，原因在于supervisor会默认配置打开的句柄数量是1024，
 
 如果要查看某个进程最大open files，可以通过这个进程的进程号对应的limits查看
 
 ```bash
-cat /proc/进程号/limits
+cat /proc/进程ID/limits
 ```
 
 其中有一行是：
@@ -70,6 +75,7 @@ cat /proc/进程号/limits
 ```bash
 Max open files	1024	1024	bytes
 ```
+
 
 supervisor托管的程序这一行默认都是supervisor配置的最大数量1024，这时需要手动改一下supervisor的配置文件，修改方式如下，以Ubuntu系统为例，找到supervisor的配置文件supervisord.conf
 
