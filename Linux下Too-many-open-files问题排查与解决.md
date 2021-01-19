@@ -5,7 +5,7 @@
 
 原文地址：
 
-[Github](https://github.com/GreyZeng/articles/blob/master/Linux%E4%B8%8BToo%20many%20open%20files%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E4%B8%8E%E8%A7%A3%E5%86%B3.md)
+[Github](https://github.com/GreyZeng/articles/blob/master/Linux%E4%B8%8BToo-many-open-files%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E4%B8%8E%E8%A7%A3%E5%86%B3.md)
 
 [语雀](https://www.yuque.com/greyzeng/uzfhep/onlvr6)
 
