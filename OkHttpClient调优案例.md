@@ -61,3 +61,25 @@ pool和OkHttp ConnectionPool占了前两位，由于很多同事开发的时候�
 
 [OkHttpClientSharePool](https://github.com/GreyZeng/juc/blob/master/src/main/java/juc/okhttp/OkHttpClientSharePool.java)
 
+类似的，还有苹果客户端的初始化代码
+```java
+ApnsClient apnsClient = new ApnsClientBuilder()
+                            .setApnsServer(apnsHost)
+                            .setClientCredentials(new File(pushConfig.getIosKeyPath()), pushConfig.getIosKeyPwd())
+                            .build();
+```
+
+有人在开发的时候，在每次push message的时候，都new 一个apnsClient，这就会导致udp连接迅速增多，在Linux中会导致Too many open files的问题，
+处理办法也比较简单，将apnsClient设置成static的全局变量，维持一份即可。
+
+```java
+private static ApnsClient apnsClient = null;
+public void push() {
+...
+   apnsClient = new ApnsClientBuilder()
+        .setApnsServer(apnsHost)
+        .setClientCredentials(new File(pushConfig.getIosKeyPath()), pushConfig.getIosKeyPwd())
+        .build();    
+...        
+}
+```
