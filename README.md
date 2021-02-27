@@ -1,4 +1,4 @@
 Spring学习笔记
 
-[JavaBeans作为IoC容器](docs/JavaBeans作为IoC容器.md)
+[JavaSE实现IoC](docs/JavaSE实现IoC.md)
 

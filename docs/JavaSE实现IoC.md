@@ -6,7 +6,14 @@
 
 [博客园](https://www.cnblogs.com/greyzeng/p/14456314.html)
 
+Java SE 提供了三种方式，可以实现IoC，分别为：
 
+- Java Beans
+- Java ServiceLoader SPI
+- JNDI（Java Naming and Directory Interface）
+
+
+## Java Beans 方式
 
 java.beans包下的 Introspector 类提供了一个 getBeanInfo的方法，可以获取一个类的信息
 
@@ -130,6 +137,71 @@ public static void main(String[] args) throws Exception {
 User{name='福尔摩斯', birthday=Thu Jan 05 23:54:17 CST 1854, address=Address{name='贝克街, 221 号}}
 ```
 
+## SPI方式
+
+定义支付接口PayService
+
+```java
+public interface PayService {
+    void pay();
+}
+```
+
+定义多个实现：
+
+```java
+public class WeixinpayService implements PayService{
+    @Override
+    public void pay() {
+        System.out.println("微信支付");
+    }
+}
+```
+
+```java
+public class AlipayService implements PayService{
+    @Override
+    public void pay() {
+        System.out.println("支付宝支付");
+    }
+}
+```
+
+在resources目录下建立META-INF文件夹，在META-INF文件夹下建立services目录，同时建立一个文件，名称为接口的全路径名，以这个项目为例, PayService的全路径名称为：
+
+```java
+org.snippets.ioc.java.spi.PayService
+```
+
+在这个文件内，把实现类的全路径名写进去：
+
+```java
+org.snippets.ioc.java.spi.AlipayService
+org.snippets.ioc.java.spi.WeixinpayService
+```
+
+客户端调用：
+
+```java
+ServiceLoader<PayService> serviceLoader = ServiceLoader.load(PayService.class);
+
+for (PayService ele : serviceLoader) {
+    ele.pay();
+}
+```
+
+其中ServiceLoader.load方法可以把所有配置的PayService实现得到
+
+执行结果：
+
+```java
+支付宝支付
+微信支付
+```
+
+
+## JNDI方式
+
 ## 完整代码
 
 [Github](https://github.com/GreyZeng/thinking-in-spring/java-beans-demo)
@@ -139,3 +211,5 @@ User{name='福尔摩斯', birthday=Thu Jan 05 23:54:17 CST 1854, address=Address
 [小马哥讲Spring核心编程思想](https://time.geekbang.org/course/intro/100042601)
 
 [PropertyEditorSupport的使用](https://blog.csdn.net/u010398771/article/details/82968574)
+
+[Java SPI机制 - ServiceLoader](https://zhuanlan.zhihu.com/p/67665359)
