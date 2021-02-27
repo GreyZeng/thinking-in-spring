@@ -2,9 +2,9 @@
 
 原文地址：
 
-[语雀](https://www.yuque.com/greyzeng/uzfhep/fa3zzc)
+[语雀](https://www.yuque.com/greyzeng/uzfhep/cvhpl0)
 
-[博客园](https://www.cnblogs.com/greyzeng/p/14456314.html)
+[博客园](https://www.cnblogs.com/greyzeng/p/14456876.html)
 
 Java SE 提供了三种方式，可以实现IoC，分别为：
 
@@ -199,8 +199,56 @@ for (PayService ele : serviceLoader) {
 微信支付
 ```
 
-
 ## JNDI方式
+
+定义一个Person类
+
+```java
+public class Person implements Remote, Serializable {
+
+    private static final long serialVersionUID = 1L;
+    private String name;
+    private String password;
+
+   // 省略set / get方法
+}
+```
+
+实现JNDI的客户端，实现初始化Person和查找Person两个功能
+
+```java
+public static void initPerson() throws Exception {
+        //配置JNDI工厂和JNDI的url和端口。如果没有配置这些信息，将会出现NoInitialContextException异常
+        LocateRegistry.createRegistry(3000);
+        System.setProperty(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.rmi.registry.RegistryContextFactory");
+        System.setProperty(Context.PROVIDER_URL, "rmi://localhost:3000");
+
+
+        InitialContext ctx = new InitialContext();
+
+        //实例化person对象
+        Person p = new Person();
+        p.setName("zc");
+        p.setPassword("123");
+
+        //将person对象绑定到JNDI服务中，JNDI的名字叫做：person。
+        ctx.bind("person", p);
+        ctx.close();
+}
+
+public static void findPerson() throws Exception {
+    //因为前面已经将JNDI工厂和JNDI的url和端口已经添加到System对象中，这里就不用在绑定了
+    InitialContext ctx = new InitialContext();
+    
+    //通过lookup查找person对象
+    Person person = (Person) ctx.lookup("person");
+    
+    //打印出这个对象
+    System.out.println(person.toString());
+    ctx.close();
+}
+```
+
 
 ## 完整代码
 
@@ -213,3 +261,5 @@ for (PayService ele : serviceLoader) {
 [PropertyEditorSupport的使用](https://blog.csdn.net/u010398771/article/details/82968574)
 
 [Java SPI机制 - ServiceLoader](https://zhuanlan.zhihu.com/p/67665359)
+
+[02_Java通信_JNDI_demo1](https://blog.csdn.net/chaojixiaozhu/article/details/84617709)
