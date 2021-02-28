@@ -6,7 +6,7 @@
 
 [博客园](https://www.cnblogs.com/greyzeng/p/14459565.html)
 
-## 依赖注入
+## 依赖查找
 
 Spring IoC 依赖查找分为以下几种方式
 
