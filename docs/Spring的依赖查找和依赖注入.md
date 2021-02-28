@@ -6,7 +6,7 @@
 
 [博客园](https://www.cnblogs.com/greyzeng/p/14459565.html)
 
-## 概述
+## 依赖注入
 
 Spring IoC 依赖查找分为以下几种方式
 
@@ -238,6 +238,97 @@ public class SuperUser extends User {
 ```
 {superUser=SuperUser{address='广州'} User{id=1, name='张三'}}
 ```
+
+## 依赖注入
+
+Spring IoC 依赖注入分为以下几种方式
+
+- 根据 Bean 名称注入
+
+- 根据 Bean 类型注入
+  - 单个 Bean 对象
+  - 集合 Bean 对象
+
+- 注入容器內建 Bean 对象
+
+- 注入非 Bean 对象
+
+- 注入类型
+  - 实时注入
+  - 延迟注入
+
+增加UserRepository
+
+```java
+
+public class UserRepository {
+    private Collection<User> users; // 自定义Bean
+    private BeanFactory beanFactory; // 内建非 Bean(依赖）
+    private ObjectFactory<ApplicationContext> objectFactory;
+    // 省略 set/get/toString方法
+}
+
+```
+
+首先我们新建一个配置文件dependency-injection.xml
+
+引入上一例中的dependency-lookup.xml，并增加一个Bean的配置, 并且配置手动注入这个Bean中属性信息
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <import resource="dependency-lookup.xml"/>
+    <bean id="userRepository"
+          class="org.snippets.spring.ioc.overview.dependency.repo.UserRepository"
+          > 
+        <!-- 手动注入 -->
+        <property name="users">
+             <util:list>
+                 <ref bean="user"/>
+                 <ref bean="superUser"/>
+             </util:list>
+         </property>
+    </bean>
+</beans>
+```
+
+测试
+
+```java
+public class DependencyInjection {
+    public static void main(String[] args) {
+        BeanFactory beanFactory = new ClassPathXmlApplicationContext("classpath:/META-INF/dependency-injection.xml");
+        UserRepository userRepository = beanFactory.getBean("userRepository", UserRepository.class);
+        System.out.println(userRepository.getUsers()); 
+    }
+}
+```
+
+可以打印出注入的user信息
+
+也可以实现自动注入，我们以按类型自动注入为例，修改xml配置
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <import resource="dependency-lookup.xml"/>
+    <bean id="userRepository"
+          class="org.snippets.spring.ioc.overview.dependency.repo.UserRepository"
+          autowire="byType"> <!-- 自动注入-->
+    </bean>
+</beans>
+```
+
+增加autowire="byType" 即可
+
 
 ## 完整代码
 
