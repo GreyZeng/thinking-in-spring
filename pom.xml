@@ -11,6 +11,7 @@
     <modules>
         <module>java-ioc-overview</module>
         <module>spring-ioc-overview</module>
+        <module>spring-bean</module>
     </modules>
     <name>thinking-in-spring</name>
 
