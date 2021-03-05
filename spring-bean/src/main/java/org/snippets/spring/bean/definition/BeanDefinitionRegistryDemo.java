@@ -1,6 +1,9 @@
 package org.snippets.spring.bean.definition;
 
+import org.snippets.spring.bean.definition.factory.DefaultUserFactory;
+import org.snippets.spring.bean.definition.factory.UserFactory;
 import org.snippets.spring.ioc.overview.dependency.domain.User;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionReaderUtils;
@@ -30,6 +33,17 @@ public class BeanDefinitionRegistryDemo {
         System.out.println("configs :" + applicationContext.getBeansOfType(Config.class));
         System.out.println("user :" + applicationContext.getBeansOfType(User.class));
 
+
+        // 通过注册外部单例对象
+        UserFactory userFactory = new DefaultUserFactory();
+        ConfigurableListableBeanFactory beanFactory = applicationContext.getBeanFactory();
+        beanFactory.registerSingleton("uF", userFactory);
+
+        UserFactory uF = applicationContext.getBean("uF", UserFactory.class);
+        System.out.println(uF == userFactory);
+
+
+        applicationContext.close();
 
     }
 

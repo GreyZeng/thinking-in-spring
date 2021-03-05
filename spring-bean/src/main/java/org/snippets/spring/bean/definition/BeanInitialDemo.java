@@ -7,6 +7,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -20,11 +21,19 @@ public class BeanInitialDemo {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
         applicationContext.register(BeanInitialDemo.class);
         applicationContext.refresh();
+        // 标记了@Lazy,这句话会先打印 ，如果Lazy = false 这句话会后打印
+        // refresh()方法中
+        // Instantiate all remaining (non-lazy-init) singletons.
+        // finishBeanFactoryInitialization(beanFactory);
+        System.out.println("对延迟加载和非延迟加载...");
         applicationContext.getBean(UserFactory.class);
+        System.out.println("应用上下文准备关闭");
         applicationContext.close();
+        System.out.println("应用上下文已经关闭");
     }
 
-    @Bean(initMethod = "initUserFactory")
+    @Bean(initMethod = "initUserFactory", destroyMethod = "destroyUserFactory")
+    @Lazy
     public UserFactory userFactory() {
         return new DefaultUserFactory();
     }
