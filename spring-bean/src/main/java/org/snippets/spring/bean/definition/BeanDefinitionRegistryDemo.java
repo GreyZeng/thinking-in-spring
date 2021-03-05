@@ -1,10 +1,17 @@
 package org.snippets.spring.bean.definition;
 
 import org.snippets.spring.ioc.overview.dependency.domain.User;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.support.BeanDefinitionReaderUtils;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+
+import static org.springframework.beans.factory.support.BeanDefinitionBuilder.genericBeanDefinition;
 
 /**
  * @author <a href="mailto:410486047@qq.com">Grey</a>
@@ -16,9 +23,28 @@ public class BeanDefinitionRegistryDemo {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
         applicationContext.register(BeanDefinitionRegistryDemo.class);
+        // 通过Java API方式来注册
+        registerBeanDefinition(applicationContext, "xx-user");
+        registerBeanDefinition(applicationContext);
         applicationContext.refresh();
         System.out.println("configs :" + applicationContext.getBeansOfType(Config.class));
         System.out.println("user :" + applicationContext.getBeansOfType(User.class));
+
+
+    }
+
+    public static void registerBeanDefinition(BeanDefinitionRegistry registry, String beanName) {
+        BeanDefinitionBuilder beanDefinitionBuilder = genericBeanDefinition(User.class);
+        beanDefinitionBuilder.addPropertyValue("id", 33L).addPropertyValue("name", "zhaoliu");
+        if (StringUtils.hasText(beanName)) {
+            registry.registerBeanDefinition(beanName, beanDefinitionBuilder.getBeanDefinition());
+        } else {
+            BeanDefinitionReaderUtils.registerWithGeneratedName(beanDefinitionBuilder.getBeanDefinition(), registry);
+        }
+    }
+
+    public static void registerBeanDefinition(BeanDefinitionRegistry registry) {
+        registerBeanDefinition(registry, null);
     }
 
     @Component
