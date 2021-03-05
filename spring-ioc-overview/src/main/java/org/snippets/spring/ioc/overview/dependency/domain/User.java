@@ -20,6 +20,12 @@ public class User {
         this.name = name;
     }
 
+    public static User createUser() {
+        User user = new User();
+        user.setId(34l);
+        user.setName("ww");
+        return user;
+    }
 
     @Override
     public String toString() {

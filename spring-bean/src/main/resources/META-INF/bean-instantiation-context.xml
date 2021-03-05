@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="user-by-static" class="org.snippets.spring.ioc.overview.dependency.domain.User"
+          factory-method="createUser"/>
+    <bean id="user-by-instantiation" factory-bean="userFactory" factory-method="createUser"/>
+    <bean class="org.snippets.spring.bean.definition.factory.DefaultUserFactory" id="userFactory"/>
+    <bean id="user-by-factory-bean" class="org.snippets.spring.bean.definition.factory.UserFactoryBean"/>
+</beans>
