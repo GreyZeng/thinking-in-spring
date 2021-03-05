@@ -26,3 +26,15 @@ BeanDefinition的注册
     - @Component
     - @import
 - Java API配置元信息
+
+Bean实例化
+
+- 常规方法
+- 非常规方法
+
+Bean的初始化
+
+顺序： @PostConstruct  > InitializingBean#afterPropertiesSet 方法 > initMethod
+
+Bean的延迟初始化
+
