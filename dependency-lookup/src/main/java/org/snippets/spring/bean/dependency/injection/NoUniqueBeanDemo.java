@@ -1,9 +1,8 @@
-package org.snippets.spring.bean.dependency.lookup;
+package org.snippets.spring.bean.dependency.injection;
 
 import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
 
 /**
  * @author <a href="mailto:410486047@qq.com">Grey</a>

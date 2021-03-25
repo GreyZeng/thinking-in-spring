@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.snippets.spring.bean.dependency.lookup;
+package org.snippets.spring.bean.dependency.injection;
 
 import org.snippets.spring.ioc.overview.dependency.domain.User;
 import org.springframework.beans.BeansException;
