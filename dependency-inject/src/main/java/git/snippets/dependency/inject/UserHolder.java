@@ -16,6 +16,14 @@ public class UserHolder {
         this.user = user;
     }
 
+    public UserHolder(User user) {
+        this.user = user;
+    }
+
+    public UserHolder() {
+
+    }
+
     private User user;
 
     @Override
