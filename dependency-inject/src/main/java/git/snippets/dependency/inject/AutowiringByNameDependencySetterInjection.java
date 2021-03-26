@@ -8,7 +8,7 @@ import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
  * @date 2021/3/25
  * @since
  */
-public class AutowiringByNameDependencyInjection {
+public class AutowiringByNameDependencySetterInjection {
     public static void main(String[] args) {
 
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
