@@ -7,6 +7,13 @@
     <bean id="user" class="org.snippets.spring.ioc.overview.dependency.domain.User">
         <property name="id" value="1"/>
         <property name="city" value="GUANGZHOU"/>
+        <property name="workCities" value="GUANGZHOU,BEIJING"/>
+        <property name="lifeCities">
+            <list>
+                <value>BEIJING</value>
+                <value>GUANGZHOU</value>
+            </list>
+        </property>
         <property name="name" value="张三"/>
         <property name="configFileResource" value="classpath:/META-INF/user-config.properties"/>
     </bean>

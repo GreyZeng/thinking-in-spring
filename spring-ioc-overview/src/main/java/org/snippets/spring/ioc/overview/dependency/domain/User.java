@@ -2,6 +2,9 @@ package org.snippets.spring.ioc.overview.dependency.domain;
 
 import org.springframework.core.io.Resource;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class User {
     @Override
     public String toString() {
@@ -9,6 +12,8 @@ public class User {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", city=" + city +
+                ", workCities=" + Arrays.toString(workCities) +
+                ", lifeCities=" + lifeCities +
                 ", configFileResource=" + configFileResource +
                 '}';
     }
@@ -16,7 +21,26 @@ public class User {
     private Long id;
     private String name;
     private City city;
+    private City[] workCities;
+
+    public List<City> getLifeCities() {
+        return lifeCities;
+    }
+
+    public void setLifeCities(List<City> lifeCities) {
+        this.lifeCities = lifeCities;
+    }
+
+    private List<City> lifeCities;
     private Resource configFileResource;
+
+    public City[] getWorkCities() {
+        return workCities;
+    }
+
+    public void setWorkCities(City[] workCities) {
+        this.workCities = workCities;
+    }
 
     public Resource getConfigFileResource() {
         return configFileResource;
