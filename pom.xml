@@ -13,8 +13,6 @@
         <module>spring-ioc-overview</module>
         <module>spring-bean</module>
         <module>dependency-lookup</module>
-        <module>dependency-Injection</module>
-        <module>dependency-injection</module>
         <module>dependency-inject</module>
     </modules>
     <name>thinking-in-spring</name>
