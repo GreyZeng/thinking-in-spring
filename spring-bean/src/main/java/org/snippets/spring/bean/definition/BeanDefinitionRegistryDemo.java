@@ -67,7 +67,7 @@ public class BeanDefinitionRegistryDemo {
         public User user() {
             User user = new User();
             user.setName("wangwu");
-            user.setId(3l);
+            user.setId(3L);
             return user;
         }
     }
