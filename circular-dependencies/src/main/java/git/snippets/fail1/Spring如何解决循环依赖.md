@@ -94,6 +94,8 @@ nested exception is org.springframework.beans.factory.BeanCurrentlyInCreationExc
 
 以x的创建为例：
 
+X阶段：
+
 1. 解析XML或者注解，将信息注册到BeanDefinition中
 2. 对象的实例化，可以理解成 X x = new X();
 3. x的属性填充(这里就涉及到要填充Y的实例)
@@ -103,6 +105,8 @@ nested exception is org.springframework.beans.factory.BeanCurrentlyInCreationExc
 
 在进行到第3步的时候，Spring会从单例池中找Y对应的Bean对象，如果找不到，则会执行y对象的创建过程生命周期，y也会经历和x一样的生命周期：
 
+Y阶段：
+
 1. 解析XML或者注解，将信息注册到BeanDefinition中
 2. 对象的实例化，可以理解成 Y y = new Y();
 3. y的属性填充(这里就涉及到要填充x的实例)
@@ -110,9 +114,15 @@ nested exception is org.springframework.beans.factory.BeanCurrentlyInCreationExc
 5. Bean后置处理器进行处理（比如AOP）
 6. 把Bean添加到单例池中
 
-这里执行到第三步的时候，需要找到x，但是x还没有进入单例池，所以，这样就会导致循环依赖问题。
+这里执行到第三步的时候，需要找到x，但是x还没有进入单例池，所以，X阶段卡在第三步无法继续执行，Y阶段也卡在第三步无法继续执行，**这就导致了循环依赖问题。**
 
+如何解决这个问题？
 
+可以使用一个map，在X阶段第二步的时候，将new出来的x放入这个map中，这样一来，Y阶段的第3步涉及x的实例填充，就可以这样执行：
+
+先从单例池中找x，找不到，**再从map中找x，此时因为X阶段的第2步已经把new出来的x放入到map中，所以可以从map中找到，填充即可。** 这样，Y阶段可以顺利执行完毕，然后X阶段正常结束
+
+这样就解决了上面提到的循环依赖的问题。
 
 参考文档
 
