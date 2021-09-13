@@ -1,4 +1,4 @@
-# Spring中的循环依赖问题
+# Spring如何解决循环依赖
 
 如果X这个类依赖了Y，Y这个类依赖了X，就产生了循环依赖。在普通Java（非Spring框架下），这并不是一个问题。
 
@@ -25,16 +25,7 @@ class B {
 }
 ```
 
-但是Spring创建对象由于有相对复杂的生命周期，所以可能会导致循环依赖的问题，我们将如上代码转换成使用Spring的方式,需要引入：
-
-```xml
-
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-context</artifactId>
-    <version>5.2.13.RELEASE</version>
-</dependency>
-```
+但是Spring创建对象由于有相对复杂的生命周期，所以可能会导致循环依赖的问题，我们将如上代码转换成使用Spring的方式：
 
 ```java
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,3 +90,20 @@ nested exception is org.springframework.beans.factory.BeanCurrentlyInCreationExc
         Requested bean is currently in creation:Is there an unresolvable circular reference?
 ```
 
+通过上述实验，可以了解，Spring解决了循环依赖的问题，如何解决的呢？我们需要先看下Spring中Bean的生命周期：
+
+以x的创建为例：
+
+1. 解析XML或者注解，将信息注册到BeanDefinition中
+2. 对象的实例化，可以理解成 X x = new X();
+3. x的属性填充(这里就涉及到要填充Y的实例)
+4. x的初始化
+5. Bean后置处理器进行处理（比如AOP）
+6. 把Bean添加到单例池中
+
+参考文档
+
+https://www.jianshu.com/p/1dec08d290c1
+https://www.cnblogs.com/zrtqsk/p/3735273.html
+https://www.cnblogs.com/javazhiyin/p/10905294.html
+https://blog.csdn.net/kznsbs/article/details/109394582
