@@ -71,21 +71,21 @@ class B {
 
 运行，正常打印出：
 
-```java
+```text
 git.snippets.fail1.A@ed9d034
 git.snippets.fail1.B@6121c9d6
 ```
 
 以下是循环依赖是否支持的开关，如果设置为true，则支持循环依赖。
 
-```java
+```text
 // 是否支持循环依赖
 applicationContext.setAllowCircularReferences(true);
 ```
 
 如果设置为false，再次运行main方法，则报错，以下为简略报错信息：
 
-```java
+```text
 nested exception is org.springframework.beans.factory.BeanCurrentlyInCreationException:Error creating bean with name'x':
         Requested bean is currently in creation:Is there an unresolvable circular reference?
 ```
@@ -100,6 +100,19 @@ nested exception is org.springframework.beans.factory.BeanCurrentlyInCreationExc
 4. x的初始化
 5. Bean后置处理器进行处理（比如AOP）
 6. 把Bean添加到单例池中
+
+在进行到第3步的时候，Spring会从单例池中找Y对应的Bean对象，如果找不到，则会执行y对象的创建过程生命周期，y也会经历和x一样的生命周期：
+
+1. 解析XML或者注解，将信息注册到BeanDefinition中
+2. 对象的实例化，可以理解成 Y y = new Y();
+3. y的属性填充(这里就涉及到要填充x的实例)
+4. y的初始化
+5. Bean后置处理器进行处理（比如AOP）
+6. 把Bean添加到单例池中
+
+这里执行到第三步的时候，需要找到x，但是x还没有进入单例池，所以，这样就会导致循环依赖问题。
+
+
 
 参考文档
 
