@@ -1,8 +1,8 @@
 Spring学习笔记
 
-[JavaSE实现IoC](docs/JavaSE实现IoC.md)
+[JavaSE实现IoC](https://www.cnblogs.com/greyzeng/p/14456876.html)
 
-[Spring的依赖查找和依赖注入](docs/Spring的依赖查找和依赖注入.md)
+[Spring的依赖查找和依赖注入](https://www.cnblogs.com/greyzeng/p/14459565.html)
 
 Bean初始化
 
