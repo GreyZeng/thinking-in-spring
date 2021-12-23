@@ -17,7 +17,7 @@ import javax.validation.Valid;
 @SessionAttributes("tacoOrder")
 public class OrderController {
 
-    private OrderRepository orderRepo;
+    private final OrderRepository orderRepo;
 
     public OrderController(OrderRepository orderRepo) {
         this.orderRepo = orderRepo;
@@ -33,10 +33,8 @@ public class OrderController {
         if (errors.hasErrors()) {
             return "orderForm";
         }
-
         orderRepo.save(order);
         sessionStatus.setComplete();
-
         return "redirect:/";
     }
 
