@@ -14,6 +14,7 @@
         <module>spring-bean</module>
         <module>dependency-lookup</module>
         <module>taco-cloud</module>
+        <module>hello-reactive</module>
         <module>dependency-inject</module>
         <module>circular-dependencies</module>
     </modules>
