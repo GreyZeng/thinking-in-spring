@@ -8,11 +8,21 @@
 
 <body>
 
-<form method="POST" th:action="@{/orders}" th:object="${tacoOrder}">
+<form id="logoutForm" method="POST" th:action="@{/logout}">
+    <input type="submit" value="Logout"/>
+</form>
+
+<form id="orderForm" method="POST" th:action="@{/orders}"
+      th:object="${order}">
     <h1>Order your taco creations!</h1>
 
     <img th:src="@{/images/TacoCloud.png}"/>
+
+    <h3>Your tacos in this order:</h3>
     <a id="another" th:href="@{/design}">Design another taco</a><br/>
+    <ul>
+        <li th:each="taco : ${order.tacos}"><span th:text="${taco.name}">taco name</span></li>
+    </ul>
 
     <div th:if="${#fields.hasErrors()}">
         <span class="validationError">
@@ -47,23 +57,18 @@
     <span class="validationError"
           th:errors="*{deliveryState}"
           th:if="${#fields.hasErrors('deliveryState')}">State Error</span>
-
     <br/>
 
     <label for="deliveryZip">Zip code: </label>
     <input th:field="*{deliveryZip}" type="text"/>
-
     <span class="validationError"
           th:errors="*{deliveryZip}"
           th:if="${#fields.hasErrors('deliveryZip')}">Zip Error</span>
-
     <br/>
 
     <h3>Here's how I'll pay...</h3>
-
     <label for="ccNumber">Credit Card #: </label>
     <input th:field="*{ccNumber}" type="text"/>
-
     <span class="validationError"
           th:errors="*{ccNumber}"
           th:if="${#fields.hasErrors('ccNumber')}">CC Num Error</span>
@@ -71,24 +76,20 @@
 
     <label for="ccExpiration">Expiration: </label>
     <input th:field="*{ccExpiration}" type="text"/>
-
     <span class="validationError"
           th:errors="*{ccExpiration}"
           th:if="${#fields.hasErrors('ccExpiration')}">CC Num Error</span>
-
     <br/>
 
     <label for="ccCVV">CVV: </label>
     <input th:field="*{ccCVV}" type="text"/>
-
     <span class="validationError"
           th:errors="*{ccCVV}"
           th:if="${#fields.hasErrors('ccCVV')}">CC Num Error</span>
-
     <br/>
 
     <input type="submit" value="Submit Order"/>
 </form>
+
 </body>
 </html>
-
