@@ -6,6 +6,7 @@
     <artifactId>thinking-in-spring</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>thinking-in-spring</name>
+    <packaging>pom</packaging>
     <description>learn spring code</description>
     <modules>
         <module>spring-multi-datasource</module>
