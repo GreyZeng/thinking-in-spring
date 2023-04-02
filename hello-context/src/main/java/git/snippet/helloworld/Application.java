@@ -20,7 +20,8 @@ public class Application {
     }
 
     public void sayHello() {
-        Hello hello = beanFactory.getBean("hello", Hello.class);
+        Hello hello = (Hello) beanFactory.getBean("hello");
+        // Hello hello = beanFactory.getBean("hello", Hello.class);
         System.out.println(hello.hello());
 
     }
