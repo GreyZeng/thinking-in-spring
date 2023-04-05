@@ -12,14 +12,18 @@ public class BeanExtend {
     private final ClassPathXmlApplicationContext childContext;
 
     public static void main(String[] args) {
-        new BeanExtend().runTests();
+        new BeanExtend(true).runTests();
+        new BeanExtend(false).runTests();
     }
 
-    public BeanExtend() {
+    public BeanExtend(boolean open) {
         parentContext = new ClassPathXmlApplicationContext("parent-beans.xml");
         childContext = new ClassPathXmlApplicationContext(new String[]{"child-beans.xml"}, true, parentContext);
         parentContext.setId("ParentContext");
         childContext.setId("ChildContext");
+        parentContext.setAllowBeanDefinitionOverriding(open);
+        childContext.setAllowBeanDefinitionOverriding(open);
+
     }
 
     public void runTests() {
