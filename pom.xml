@@ -11,6 +11,7 @@
 
 	<modules>
 		<module>spring-web-demo</module>
+		<module>ioc-demo</module>
 	</modules>
 
 </project>

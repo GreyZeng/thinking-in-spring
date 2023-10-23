@@ -1,4 +1,4 @@
-package git.thinking.in.spring;
+package git.thinking.in.spring.ioc.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
