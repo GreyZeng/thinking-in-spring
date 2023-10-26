@@ -12,6 +12,7 @@
 	<modules>
 		<module>spring-web-demo</module>
 		<module>ioc-demo</module>
+		<module>construct-demo</module>
 		<module>context-inherit</module>
 	</modules>
 
