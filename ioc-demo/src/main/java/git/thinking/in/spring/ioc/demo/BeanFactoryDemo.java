@@ -4,20 +4,19 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 
-public class Application {
+public class BeanFactoryDemo {
     private BeanFactory beanFactory;
 
     public static void main(String[] args) {
 //        Hello hello = new Hello();
 //        System.out.println(hello.hello());
-        Application application = new Application();
+        BeanFactoryDemo application = new BeanFactoryDemo();
         application.sayHello();
     }
 
-    public Application() {
+    public BeanFactoryDemo() {
         beanFactory = new DefaultListableBeanFactory();
-        XmlBeanDefinitionReader reader =
-                new XmlBeanDefinitionReader((DefaultListableBeanFactory) beanFactory);
+        XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader((DefaultListableBeanFactory) beanFactory);
         reader.loadBeanDefinitions("beans.xml");
     }
 
