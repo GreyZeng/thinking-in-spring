@@ -1,4 +1,4 @@
-package git.thinking.in.spring.ioc.demo;
+package git.thinking.in.spring.inherit.demo;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;

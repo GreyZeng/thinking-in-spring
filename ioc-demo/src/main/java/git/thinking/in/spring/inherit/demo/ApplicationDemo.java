@@ -1,4 +1,4 @@
-package git.thinking.in.spring.ioc.demo;
+package git.thinking.in.spring.inherit.demo;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

@@ -1,4 +1,4 @@
-package git.thinking.in.spring.ioc.demo;
+package git.thinking.in.spring.inherit.demo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
