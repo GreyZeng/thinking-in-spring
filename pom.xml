@@ -15,6 +15,7 @@
         <module>ioc-demo</module>
         <module>construct-demo</module>
         <module>context-inherit</module>
+        <module>binarytea</module>
     </modules>
 
 </project>
