@@ -11,6 +11,7 @@
 
     <modules>
         <module>spring-web-demo</module>
+        <module>spring-web-actuator</module>
         <module>spring-web-demo-with-security</module>
         <module>spring-web-demo-no-parents</module>
         <module>ioc-demo</module>
